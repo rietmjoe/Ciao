@@ -5,7 +5,7 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(180deg, #f4f4f4, #dddddd);
+  background: #dcdcdc;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -19,122 +19,140 @@ body {
 }
 
 h1 {
-  margin-bottom: 8px;
-}
-
-.subtitle {
-  margin-top: 0;
   margin-bottom: 40px;
+  font-size: 28px;
+  font-weight: 500;
   color: #555;
 }
 
 .envelope-wrapper {
   position: relative;
-  width: 320px;
+  width: 340px;
   height: 280px;
   margin: 0 auto;
   cursor: pointer;
+  perspective: 1000px;
 }
 
 /* Brief */
 .letter {
   position: absolute;
   left: 50%;
-  bottom: 30px;
-  transform: translateX(-50%) translateY(80px);
-  width: 220px;
+  bottom: 18px;
+  transform: translateX(-50%) translateY(70px);
+  width: 250px;
   background: white;
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 18px;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
   z-index: 2;
-  transition: transform 0.9s ease;
+  transition: transform 0.8s ease;
 }
 
 .message {
-  margin-top: 0;
-  margin-bottom: 14px;
-  font-size: 18px;
-  font-weight: bold;
+  margin: 0 0 14px 0;
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .letter-photo {
   width: 100%;
-  height: auto;
   display: block;
-  border-radius: 8px;
+  border-radius: 10px;
   object-fit: cover;
 }
 
-/* Couvert */
-.envelope {
+/* Couvert Rückseite */
+.envelope-back {
   position: absolute;
   left: 50%;
   bottom: 0;
   transform: translateX(-50%);
-  width: 320px;
-  height: 200px;
-}
-
-/* Rückseite */
-.back {
-  position: absolute;
-  inset: 0;
-  background: #cfa76c;
-  border-radius: 0 0 14px 14px;
+  width: 340px;
+  height: 220px;
+  background: #c79f62;
+  border-radius: 0 0 16px 16px;
   z-index: 1;
 }
 
-/* Vorderseite */
-.front {
+/* Couvert Vorderseite */
+.envelope-front {
   position: absolute;
-  inset: 0;
-  background: #c79c62;
-  clip-path: polygon(0 100%, 0 0, 50% 55%, 100% 0, 100% 100%);
-  border-radius: 0 0 14px 14px;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 340px;
+  height: 220px;
+  background: #c79f62;
+  clip-path: polygon(0 100%, 0 0, 50% 58%, 100% 0, 100% 100%);
+  border-radius: 0 0 16px 16px;
   z-index: 3;
 }
 
-/* Lasche */
-.flap {
+.envelope-front::before {
+  content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 320px;
-  height: 140px;
+  inset: 0;
+  background: #d8b27c;
+  clip-path: polygon(0 0, 50% 58%, 100% 0, 100% 100%, 0 100%);
+  opacity: 0.55;
+}
+
+.envelope-front::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #b98a4b;
+  clip-path: polygon(0 100%, 50% 58%, 100% 100%);
+}
+
+/* Lasche */
+.envelope-flap {
+  position: absolute;
+  left: 50%;
+  top: 60px;
+  transform: translateX(-50%) rotateX(0deg);
+  transform-origin: top center;
+  width: 340px;
+  height: 160px;
   background: #e1bd8d;
   clip-path: polygon(0 0, 100% 0, 50% 100%);
-  transform-origin: top center;
-  transition: transform 0.8s ease;
   z-index: 4;
+  transition: transform 0.8s ease;
 }
 
 /* Geöffnet */
-.envelope-wrapper.open .flap {
-  transform: rotateX(180deg);
+.envelope-wrapper.open .envelope-flap {
+  transform: translateX(-50%) rotateX(180deg);
 }
 
 .envelope-wrapper.open .letter {
-  transform: translateX(-50%) translateY(-120px);
+  transform: translateX(-50%) translateY(-95px);
 }
 
 @media (max-width: 420px) {
   .envelope-wrapper {
-    width: 280px;
+    width: 290px;
     height: 250px;
   }
 
-  .envelope {
-    width: 280px;
-    height: 180px;
+  .envelope-back,
+  .envelope-front,
+  .envelope-flap {
+    width: 290px;
   }
 
-  .flap {
-    width: 280px;
-    height: 120px;
+  .envelope-back,
+  .envelope-front {
+    height: 190px;
+  }
+
+  .envelope-flap {
+    height: 135px;
+    top: 70px;
   }
 
   .letter {
-    width: 200px;
+    width: 220px;
   }
 }
