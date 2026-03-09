@@ -1,0 +1,145 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(180deg, #f4f4f4, #dddddd);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #222;
+}
+
+.scene {
+  text-align: center;
+  padding: 24px;
+}
+
+h1 {
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  margin-top: 0;
+  margin-bottom: 40px;
+  color: #555;
+}
+
+.envelope-wrapper {
+  position: relative;
+  width: 320px;
+  height: 240px;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+/* Brief */
+.letter {
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%) translateY(70px);
+  width: 240px;
+  background: white;
+  border-radius: 10px;
+  padding: 18px 18px 14px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+  z-index: 1;
+  transition: transform 0.9s ease;
+}
+
+.message {
+  margin-top: 0;
+  margin-bottom: 14px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.letter-photo {
+  width: 100%;
+  display: block;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* Couvert */
+.envelope {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 200px;
+  z-index: 2;
+}
+
+.front {
+  position: absolute;
+  inset: 0;
+  background: #d8b27c;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 0);
+  border-radius: 0 0 12px 12px;
+  overflow: hidden;
+}
+
+.front::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #c79c62;
+  clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
+}
+
+.front::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #b98a4b;
+  clip-path: polygon(0 100%, 50% 55%, 100% 100%);
+}
+
+.flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 320px;
+  height: 140px;
+  background: #e1bd8d;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  transition: transform 0.8s ease;
+  z-index: 3;
+}
+
+/* Geöffnet */
+.envelope-wrapper.open .flap {
+  transform: rotateX(180deg);
+}
+
+.envelope-wrapper.open .letter {
+  transform: translateX(-50%) translateY(-110px);
+}
+
+@media (max-width: 420px) {
+  .envelope-wrapper {
+    width: 280px;
+    height: 220px;
+  }
+
+  .envelope {
+    width: 280px;
+    height: 180px;
+  }
+
+  .flap {
+    width: 280px;
+    height: 120px;
+  }
+
+  .letter {
+    width: 215px;
+  }
+}
